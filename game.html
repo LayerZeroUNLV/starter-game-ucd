@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Play Bombardiro Crocodilo - The Wildest Slots!" />
+  <meta name="author" content="Bombardiro Crocodilo Slots" />
+  <title>Bombardiro Crocodilo Slots</title>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('files/bombardiro-crocodilo-bg.png') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    header, main, footer {
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 8px;
+      margin: 20px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1, h2 {
+      font-family: 'Luckiest Guy', cursive;
+      text-shadow: 0 0 10px gold, 0 0 20px neonblue;
+    }
+
+    button {
+      background-color: gold;
+      color: #000;
+      font-weight: bold;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #FFD700;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      background-color: #f7c400;
+    }
+
+    .symbol {
+      position: fixed;
+      font-size: 2rem;
+      animation: floatSymbols 10s linear infinite;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    @keyframes floatSymbols {
+      0% { transform: translateY(0); opacity: 0.2; }
+      50% { opacity: 0.6; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+
+    .slot-machine {
+      margin-top: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 12px;
+      display: inline-block;
+    }
+
+    .reels {
+      display: flex;
+      justify-content: center;
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .reel {
+      width: 80px;
+      height: 80px;
+      margin: 0 10px;
+      background-color: #222;
+      border: 2px solid gold;
+      border-radius: 8px;
+      line-height: 80px;
+    }
+
+    footer a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Symbols -->
+  <div class="symbol" style="left:10%; animation-delay: 0s;">♠</div>
+  <div class="symbol" style="left:30%; animation-delay: 3s;">♥</div>
+  <div class="symbol" style="left:50%; animation-delay: 6s;">♦</div>
+  <div class="symbol" style="left:70%; animation-delay: 1s;">♣</div>
+  <div class="symbol" style="left:90%; animation-delay: 5s;">♠</div>
+
+  <!-- Header -->
+  <header>
+    <h1>Bombardiro Crocodilo Slots</h1>
+    <p>Spin the reels of destiny. Will you roar with riches?</p>
+  </header>
+
+  <!-- Main Game -->
+  <main>
+    <section class="slot-machine">
+      <h2>🎰 Spin to Win</h2>
+      <div class="reels">
+        <div class="reel" id="reel1">🍒</div>
+        <div class="reel" id="reel2">🍋</div>
+        <div class="reel" id="reel3">🔔</div>
+      </div>
+      <button onclick="spin()">🎯 Spin</button>
+      <p id="result" style="margin-top: 20px; font-weight: bold;"></p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Bombardiro Crocodilo Slots. All rights reserved.</p>
+    <p>Follow us on:
+      <a href="#">Facebook</a> |
+      <a href="#">Twitter</a> |
+      <a href="#">Instagram</a>
+    </p>
+  </footer>
+
+  <!-- Slot Game Script -->
+  <script>
+    const symbols = ["🍒", "🍋", "🔔", "⭐", "💎", "7️⃣"];
+    const reels = [document.getElementById("reel1"), document.getElementById("reel2"), document.getElementById("reel3")];
+    const result = document.getElementById("result");
+
+    function spin() {
+      let outcome = [];
+      reels.forEach((reel, i) => {
+        const rand = Math.floor(Math.random() * symbols.length);
+        reel.textContent = symbols[rand];
+        outcome.push(symbols[rand]);
+      });
+
+      // Basic win check
+      if (outcome[0] === outcome[1] && outcome[1] === outcome[2]) {
+        result.textContent = "🎉 JACKPOT! You won big! 🎉";
+        result.style.color = "#FFD700";
+      } else if (outcome[0] === outcome[1] || outcome[1] === outcome[2] || outcome[0] === outcome[2]) {
+        result.textContent = "✨ Nice! Two of a kind!";
+        result.style.color = "#00FF99";
+      } else {
+        result.textContent = "😢 Better luck next spin!";
+        result.style.color = "#FF6666";
+      }
+    }
+  </script>
+</body>
+</html>
