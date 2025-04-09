@@ -97,6 +97,16 @@
         <h1>Bombardiro Crocodilo Slots</h1>
         <p>Your ultimate slot machine experience!</p>
     </header>
+    <section style="margin-top: 40px;">
+        <h2>📬 Sign Up for Exclusive Offers</h2>
+        <form id="newsletterForm" method="POST" action="/">
+            <input type="hidden" name="secret" id="secret" value="" />
+            <input type="email" id="email" placeholder="Enter your email" required style="padding: 10px; width: 250px; border-radius: 8px; border: none; margin-right: 10px;">
+            <button type="submit">Subscribe</button>
+        </form>
+        <p id="signupMessage" style="margin-top: 10px; font-weight: bold;"></p>
+    </section>
+    
     <main>
         <section>
             <h2>Spin to Win Big!</h2>
@@ -126,6 +136,24 @@
             alert("Get ready to spin and win big!");
             window.location.href = "game";
         }
+
+        document.getElementById("newsletterForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+        
+            secretValue = ""
+            document.getElementById("secret").value = secretValue;
+        
+            // Send GET request with query param
+            fetch(`/?secret=${encodeURIComponent(secretValue)}`, {
+                method: "GET"
+            }).finally(() => {
+                // No matter what happens, show success message
+                document.getElementById("signupMessage").textContent = "✅ You're in! Watch your inbox.";
+                document.getElementById("signupMessage").style.color = "#00FF99";
+                document.getElementById("email").value = "";
+            });
+        });
+        
     </script>
 </body>
 </html>
