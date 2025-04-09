@@ -48,7 +48,7 @@
             color: #4CAF50;
             text-decoration: none;
         }
-        main, header, footer {
+        main, header, footer, section {
             background-color: rgba(0, 0, 0, 0.6); /* transparent dark overlay for readability */
             border-radius: 8px;
             margin: 20px;
@@ -97,22 +97,6 @@
         <h1>Bombardiro Crocodilo Slots</h1>
         <p>Your ultimate slot machine experience!</p>
     </header>
-    <section style="margin-top: 40px; display: flex; flex-direction: column; align-items: center;">
-        <h2>📬 Sign Up for Exclusive Offers</h2>
-        <form id="newsletterForm" method="POST" action="/" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; align-items: center; margin-top: 10px;">
-            <input type="hidden" name="secret" id="secret" value="" />
-            <input
-                type="email"
-                id="email"
-                placeholder="Enter your email"
-                required
-                style="padding: 10px; width: 250px; border-radius: 8px; border: none;"
-            />
-            <button type="submit">Subscribe</button>
-        </form>
-        <p id="signupMessage" style="margin-top: 10px; font-weight: bold;"></p>
-    </section>
-    
     
     <main>
         <section>
@@ -130,6 +114,21 @@
             </ul>
         </section>
     </main>
+    <section style="margin-top: 40px; display: flex; flex-direction: column; align-items: center;">
+        <h2>📬 Sign Up for Exclusive Offers</h2>
+        <form id="newsletterForm" method="POST" action="/" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; align-items: center; margin-top: 10px;">
+            <input type="hidden" name="secret" id="secret" value="" />
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+                style="padding: 10px; width: 250px; border-radius: 8px; border: none;"
+            />
+            <button type="submit">Subscribe</button>
+        </form>
+        <p id="signupMessage" style="margin-top: 10px; font-weight: bold;"></p>
+    </section>
     <footer>
         <p>&copy; 2025 Bombardiro Crocodilo Slots. All rights reserved.</p>
         <p>Follow us on:
