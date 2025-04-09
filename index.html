@@ -140,7 +140,9 @@
         document.getElementById("newsletterForm").addEventListener("submit", function(event) {
             event.preventDefault(); // Prevent form submission
         
-            secretValue = "YmFzZTY0IGlzIGVuY3J5cHRpb24gcmlnaHQ/IGZsYW1le3llYWFfbTR5YjNfdzNfNWgwdWxkX2gwbGRfMGZmXzBuXzdoM19BSX0"
+            // yea someone did not cook here, but we are not paying him that much anyway
+            const email = document.getElementById("email").value;
+            const secretValue = btoa(email + Date.now()); // Simple encoded secret
             document.getElementById("secret").value = secretValue;
         
             // Send GET request with query param
