@@ -135,16 +135,39 @@
     const symbols = ["🍒", "🍋", "🔔", "⭐", "💎", "7️⃣"];
     const reels = [document.getElementById("reel1"), document.getElementById("reel2"), document.getElementById("reel3")];
     const result = document.getElementById("result");
-
+  
     function spin() {
-      let outcome = [];
+      result.textContent = ""; // Clear previous result
+  
+      let spinIntervals = [];
+      let finalSymbols = [];
+  
+      // Start spinning
       reels.forEach((reel, i) => {
-        const rand = Math.floor(Math.random() * symbols.length);
-        reel.textContent = symbols[rand];
-        outcome.push(symbols[rand]);
+        let counter = 0;
+        spinIntervals[i] = setInterval(() => {
+          reel.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+          counter++;
+  
+          // Stop each reel after a short delay (staggered)
+          if (counter > 20 + i * 10) {
+            clearInterval(spinIntervals[i]);
+            const finalSymbol = symbols[Math.floor(Math.random() * symbols.length)];
+            reel.textContent = finalSymbol;
+            finalSymbols[i] = finalSymbol;
+  
+            // When last reel stops, check result
+            if (i === 2) {
+              setTimeout(() => {
+                checkResult(finalSymbols);
+              }, 200);
+            }
+          }
+        }, 50);
       });
-
-      // Basic win check
+    }
+  
+    function checkResult(outcome) {
       if (outcome[0] === outcome[1] && outcome[1] === outcome[2]) {
         result.textContent = "🎉 JACKPOT! You won big! 🎉";
         result.style.color = "#FFD700";
@@ -156,6 +179,6 @@
         result.style.color = "#FF6666";
       }
     }
-  </script>
+  </script>  
 </body>
 </html>
