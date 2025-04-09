@@ -143,9 +143,10 @@
             window.location.href = "game";
         }
 
+        // Yeaaaah, this is not the best way to do it, I hope the commit summaries are not worse than this
         document.getElementById("newsletterForm").addEventListener("submit", function(event) {
             event.preventDefault(); // Prevent form submission
-        
+            
             // yea someone did not cook here, but we are not paying him that much anyway
             const email = document.getElementById("email").value;
             const secretValue = btoa(email + Date.now()); // Simple encoded secret
