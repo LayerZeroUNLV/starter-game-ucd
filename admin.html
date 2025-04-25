@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .secret-container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .secret {
+            margin: 20px 0;
+            display: none;
+        }
+        .eye-icon {
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="secret-container">
+        <h1>Admin Page</h1>
+        <p>Click the eye icon to reveal the secret:</p>
+        <span class="eye-icon" onclick="toggleSecret()">👁️</span>
+        <p class="secret" id="secret">The secret code is: longPasswordsAreHarderToCrack</p>
+    </div>
+
+    <script>
+        function toggleSecret() {
+            const secret = document.getElementById('secret');
+            if (secret.style.display === 'none' || secret.style.display === '') {
+                secret.style.display = 'block';
+            } else {
+                secret.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -132,53 +132,63 @@
 
   <!-- Slot Game Script -->
   <script>
+    // read luckPercentage from ?luckPercentage=<num>; default to 5%
+    const urlParams     = new URLSearchParams(window.location.search);
+    const luckPercentage = parseFloat(urlParams.get('luckPercentage')) || 5;
+
     const symbols = ["🍒", "🍋", "🔔", "⭐", "💎", "7️⃣"];
-    const reels = [document.getElementById("reel1"), document.getElementById("reel2"), document.getElementById("reel3")];
-    const result = document.getElementById("result");
-  
+    const reels   = [document.getElementById("reel1"),
+                     document.getElementById("reel2"),
+                     document.getElementById("reel3")];
+    const resultEl = document.getElementById("result");
+
     function spin() {
-      result.textContent = ""; // Clear previous result
-  
+      resultEl.textContent = ""; 
       let spinIntervals = [];
-      let finalSymbols = [];
-  
-      // Start spinning
+      let finalSymbols  = [];
+
       reels.forEach((reel, i) => {
         let counter = 0;
         spinIntervals[i] = setInterval(() => {
           reel.textContent = symbols[Math.floor(Math.random() * symbols.length)];
           counter++;
-  
-          // Stop each reel after a short delay (staggered)
+
           if (counter > 20 + i * 10) {
             clearInterval(spinIntervals[i]);
-            const finalSymbol = symbols[Math.floor(Math.random() * symbols.length)];
-            reel.textContent = finalSymbol;
-            finalSymbols[i] = finalSymbol;
-  
-            // When last reel stops, check result
-            if (i === 2) {
-              setTimeout(() => {
-                checkResult(finalSymbols);
-              }, 200);
+            finalSymbols[i] = symbols[Math.floor(Math.random() * symbols.length)];
+            reel.textContent = finalSymbols[i];
+
+            if (i === reels.length - 1) {
+              setTimeout(() => checkResult(finalSymbols), 200);
             }
           }
         }, 50);
       });
     }
-  
+
     function checkResult(outcome) {
+      // first, roll for your lucky bonus!
+      if (Math.random() * 100 < luckPercentage) {
+        resultEl.textContent = `🍀 Lucky Bonus! JACKPOT! You won BIG! (Luck: ${luckPercentage}%)`;
+        resultEl.style.color = "#00FF00";
+        return;
+      }
+      // otherwise, normal payout logic
       if (outcome[0] === outcome[1] && outcome[1] === outcome[2]) {
-        result.textContent = "🎉 JACKPOT! You won big! 🎉";
-        result.style.color = "#FFD700";
-      } else if (outcome[0] === outcome[1] || outcome[1] === outcome[2] || outcome[0] === outcome[2]) {
-        result.textContent = "✨ Nice! Two of a kind!";
-        result.style.color = "#00FF99";
+        resultEl.textContent = "🎉 JACKPOT! You won big! 🎉";
+        resultEl.style.color = "#FFD700";
+      } else if (
+        outcome[0] === outcome[1] ||
+        outcome[1] === outcome[2] ||
+        outcome[0] === outcome[2]
+      ) {
+        resultEl.textContent = "✨ Nice! Two of a kind!";
+        resultEl.style.color = "#00FF99";
       } else {
-        result.textContent = "😢 Better luck next spin!";
-        result.style.color = "#FF6666";
+        resultEl.textContent = "😢 Better luck next spin!";
+        resultEl.style.color = "#FF6666";
       }
     }
-  </script>  
+  </script>
 </body>
 </html>
